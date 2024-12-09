@@ -1,0 +1,43 @@
+/* Menambahkan warna untuk tombol aktif */
+.nav-sidebar .nav-link.active {
+    background-color: #dbeb04; /* Warna abu-abu */
+    color: #000000; /* Teks putih */
+}
+
+.nav-sidebar .nav-link.active .nav-icon {
+    color: #000000; /* Menjaga ikon tetap putih */
+}
+
+.btn-tambah {
+    background-color: #dbeb04; /* Hijau */
+    color: rgb(0, 0, 0);
+    border: none;
+}
+
+.btn-tambah:hover {
+    background-color: #000000; /* Hijau lebih gelap saat hover */
+    color: #fff; /* Teks putih */
+}
+
+.main-sidebar {
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+body {
+    padding-top: 57px; /* Sesuaikan dengan tinggi navbar Anda */
+}
+
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff; /* Warna latar belakang */
+    z-index: 9999; /* Di atas semua elemen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
