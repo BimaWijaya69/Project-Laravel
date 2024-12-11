@@ -17,7 +17,7 @@ class CetakPDFController extends Controller
         $data = $products->map(function ($product) {
             $stokMasuk = $product->brgmasuk->sum('stok');
             $stokKeluar = $product->brgkeluar->sum('stok');
-            $totalStok = $stokMasuk - $stokKeluar;
+            $totalStok = $product->stok;
 
             return [
                 'sku' => $product->sku,

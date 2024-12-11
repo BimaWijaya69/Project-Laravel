@@ -16,10 +16,16 @@ class LaporanController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Mengambil semua data produk
-        $products = Product::all();
+        // Ambil input pencarian
+        $search = $request->input('search');
+
+        // Query untuk produk, termasuk filter pencarian
+        $products = Product::when($search, function ($query, $search) {
+            return $query->where('sku', 'like', "%{$search}%")
+                ->orWhere('nama', 'like', "%{$search}%");
+        })->get();
 
         // Mengambil stok masuk dan keluar per produk
         $laporanBarang = $products->map(function ($product) {
@@ -29,21 +35,26 @@ class LaporanController extends Controller
             // Stok Keluar (Barang Keluar)
             $stokKeluar = BrgKeluar::where('product_id', $product->id)->sum('stok');
 
-            // Cukup tampilkan stok yang ada pada barang (tanpa menghitung stok masuk dan keluar)
-            $totalStok = $product->stok;  // Mengambil stok yang ada di tabel products
+            // Total stok diambil langsung dari kolom stok produk
+            $totalStok = $product->stok;
 
             return [
                 'sku' => $product->sku,
                 'nama_barang' => $product->nama,
                 'stok_masuk' => $stokMasuk,
                 'stok_keluar' => $stokKeluar,
-                'total_stok' => $totalStok  // Menampilkan stok yang ada
+                'total_stok' => $totalStok
             ];
         });
 
         // Kirim data ke view
-        return view('pages.laporans.index', compact('laporanBarang'));
+        return view('pages.laporans.index', [
+            'laporanBarang' => $laporanBarang,
+            'search' => $search
+        ]);
     }
+
+
 
 
     /**

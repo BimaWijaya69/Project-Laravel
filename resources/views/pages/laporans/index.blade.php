@@ -18,11 +18,29 @@
         <div class="col">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <button class="btn btn-tambah ml-auto"
-                        onclick="window.location.href='{{ route('laporan-barang.cetak') }}'">
-                        Cetak PDF
-                    </button>
+                    <!-- Form Search (Posisi Kiri) -->
+                    <div style="width:85%;">
+                        <form action="{{ route('laporans.index') }}" method="GET" class="form-inline">
+                            <div class="input-group">
+                                <input type="text" name="search" class="form-control"
+                                    placeholder="Cari kode/nama barang..." value="{{ request('search') }}">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-tambah">Cari</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Tombol Download PDF (Posisi Kanan) -->
+                    <div>
+                        <button class="btn btn-tambah ml-auto"
+                            onclick="window.location.href='{{ route('laporan-barang.cetak') }}'">
+                            Download PDF
+                        </button>
+                    </div>
                 </div>
+
+
 
                 <div class="card-body">
                     <table class="table table-striped table-hover table-bordered align-middle">
@@ -47,7 +65,7 @@
                                     <td>{{ $laporan['total_stok'] }}</td>
                                 </tr>
                             @endforeach
-                        </tbody>ch
+                        </tbody>
                         </tbody>
                     </table>
                 </div>

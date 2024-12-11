@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 use App\Http\Controllers\Admin\BrgKeluarController;
 use App\Http\Controllers\Admin\BrgMasukController;
